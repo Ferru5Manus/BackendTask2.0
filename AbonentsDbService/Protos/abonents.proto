@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "AbonentsDbService.Services";
+package abonents;
+
+service Abonents {
+  rpc GetAbonent(AbonentRequest) returns (AbonentsReply) {}
+}
+message AbonentRequest {
+  
+}
+message AbonentsReply{
+  repeated Abonent abonents = 1;
+}
+message Passport {
+  int32 passportSeries = 1;
+  int32 passportNumber = 2;
+  string issuer = 3;
+}
+
+message Contract {
+  string contractNumber = 1;
+  int64 signingDate = 2;
+  int32 contractType = 3;
+  int64 closingDate = 4;
+  string closingReason = 5;
+}
+
+message Abonent {
+  string abonentNumber = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string patronymic = 4;
+  int32 passportSeries = 5;
+  int32 contractNumber = 6;
+  int32 personalAccount = 7;
+  string address = 8;
+  Passport passport = 9;
+  Contract contract = 10;
+}
