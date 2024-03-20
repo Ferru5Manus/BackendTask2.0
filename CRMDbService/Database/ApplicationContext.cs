@@ -1,6 +1,21 @@
-﻿namespace CRMDbService.Database;
+﻿using CRMDbService.Models;
+using Microsoft.EntityFrameworkCore;
 
-public class ApplicationContext
+namespace CRMDbService.Database;
+
+public class ApplicationContext : DbContext
 {
-    
+   public DbSet<Application> Applications { get; set; }
+   public DbSet<Service> Services { get; set; }
+   public DbSet<TechnicalSupportCall> TechnicalSupportCalls { get; set; }
+
+   public ApplicationContext()
+   {
+      Database.EnsureCreated();
+   }
+
+   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   {
+      optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+   }
 }

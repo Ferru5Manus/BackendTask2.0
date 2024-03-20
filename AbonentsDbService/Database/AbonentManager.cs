@@ -13,6 +13,39 @@ public class AbonentManager
         }
     }
 
+    public async Task<Abonent> GetAbonentByNumber(string abonentNumber)
+    {
+        using (ApplicationContext  db = new ApplicationContext())
+        {
+            var abonent = await db.Abonents.FirstOrDefaultAsync(x => x.AbonentNumber == abonentNumber);
+            return new Abonent()
+            {
+                AbonentNumber = abonent.AbonentNumber,
+                FirstName = abonent.FirstName,
+                LastName = abonent.LastName,
+                Patronymic = abonent.Patronymic,
+                PassportSeries = abonent.PassportSeries,
+                ContractNumber = abonent.ContractNumber,
+                PersonalAccount = abonent.PersonalAccount,
+                Address = abonent.Address,
+                Contract = new Contract()
+                {
+                    ContractNumber = abonent.Contract.ContractNumber,
+                    SigningDate = Convert.ToInt64(abonent.Contract.SigningDate),
+                    ContractType = abonent.Contract.ContractType,
+                    ClosingDate = Convert.ToInt64(abonent.Contract.ClosingDate),
+                    ClosingReason = abonent.Contract.ClosingReason
+                },
+                Passport = new Passport()
+                {
+                    PassportSeries = abonent.Passport.PassportSeries,
+                    PassportNumber = abonent.Passport.PassportNumber,
+                    Issuer = abonent.Passport.Issuer
+                },
+                PhoneNumber = abonent.PhoneNumber
+            };
+        }
+    }
     private async Task<List<Abonent>> ConvertList(List<Models.Abonent> abonents)
     {
         List<Abonent> abonentList = new List<Abonent>();
@@ -41,8 +74,8 @@ public class AbonentManager
                     PassportSeries = VARIABLE.Passport.PassportSeries,
                     PassportNumber = VARIABLE.Passport.PassportNumber,
                     Issuer = VARIABLE.Passport.Issuer
-                }
-                
+                },
+                PhoneNumber = VARIABLE.PhoneNumber
             });
         }
         return abonentList;

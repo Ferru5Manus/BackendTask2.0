@@ -10,6 +10,7 @@ public class Abonent
     [RegularExpression(@"^78[А-Я]{1}[0-9]{6}$", ErrorMessage = "Invalid Abonent Number format. Example: 78А000001")]
     public string AbonentNumber { get; set; }
     public string FirstName { get; set; }
+    public string PhoneNumber { get; set; }
     public string LastName { get; set; }
     public string Patronymic { get; set; }
     

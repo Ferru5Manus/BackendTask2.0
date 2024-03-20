@@ -1,13 +1,20 @@
 syntax = "proto3";
 
-option csharp_namespace = "AbonentsDbService.Services";
+option csharp_namespace = "AbonentManagementService.Communicators";
 package abonents;
 
 service Abonents {
   rpc GetAbonent(AbonentRequest) returns (AbonentsReply) {}
+  rpc GetAbonentByPhoneNumber(AbonentByNumberRequest) returns (AbonentByNumberReply) {}
 }
 message AbonentRequest {
-  
+
+}
+message AbonentByNumberRequest {
+  string abonentNumber = 1;
+}
+message AbonentByNumberReply{
+  Abonent abonent = 1;
 }
 message AbonentsReply{
   repeated Abonent abonents = 1;
@@ -35,6 +42,7 @@ message Abonent {
   int32 contractNumber = 6;
   int32 personalAccount = 7;
   string address = 8;
-  Passport passport = 9;
-  Contract contract = 10;
+  string phoneNumber = 9;
+  Passport passport = 10;
+  Contract contract = 11;
 }

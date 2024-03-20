@@ -1,0 +1,53 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CRMDbService.Services";
+package crmdb;
+
+service CRMDb {
+  rpc GetAllServices(EmptyRequest) returns (ServiceList) {}
+  rpc AddApplication(Application) returns (ApplicationResponse) {}
+  rpc GetAllApplications(EmptyRequest) returns (ApplicationList) {} 
+  rpc GetAllTechnicalSupportCalls(EmptyRequest) returns (TechnicalSupportCallList) {}
+}
+
+message EmptyRequest {}
+
+message ServiceList {
+  repeated Service services = 1;
+}
+message Application {
+  string applicationNumber = 1;
+  int64 beginDate = 2;
+  string abonentNumber = 3;
+  string personalAccount = 4;
+  Service service = 5;
+  string equipmentType = 6;
+  TechnicalSupportCall technicalSupportCall = 7;
+  int64 closeDate = 8;
+}
+message Service {
+  int64 serviceId = 1;
+  string serviceName = 2;
+  int64 connectionDate = 3;
+  string abonentNumber = 4;
+  string serviceType = 5;
+  string serviceView = 6;
+  string status = 7;
+}
+message TechnicalSupportCall {
+  int64 technicalSupportCallID = 1;
+  int64 callDate = 2;
+  string problemType = 3;
+  string problemDescription = 4;
+  string abonentNumber = 5;
+}
+message ApplicationList {
+  repeated Application applications = 1;
+}
+message TechnicalSupportCallList {
+  repeated TechnicalSupportCall technicalSupportCalls = 1;
+}
+message ApplicationResponse {
+  bool success = 1;
+  string error = 2;
+}
