@@ -1,11 +1,13 @@
+using AbonentManagementService.Communicators;
+using AbonentManagementService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
-
+builder.Services.AddSingleton<AbonentsDbCommunicator>();
 var app = builder.Build();
-
+app.MapGrpcService<AbonentsManagementService>();
 // Configure the HTTP request pipeline.
 app.MapGet("/",
     () =>

@@ -10,12 +10,12 @@ public class AbonentsManagementService : AbonentsManager.AbonentsManagerBase
     {
         _communicator = communicator;
     }
-    public async override Task<AbonentsReply> GetAbonent(AbonentRequest request, ServerCallContext context)
+    public  override async Task<AbonentsReply> GetAbonent(AbonentRequest request, ServerCallContext context)
     {
         return await _communicator.GetAbonents();
     }
     
-    public async override Task<AbonentByNumberReply> GetAbonentByPhoneNumber(AbonentByNumberRequest request,
+    public override async Task<AbonentByNumberReply> GetAbonentByPhoneNumber(AbonentByNumberRequest request,
         ServerCallContext context)
     {
         return await _communicator.GetAbonentsByNumber(request.AbonentNumber);

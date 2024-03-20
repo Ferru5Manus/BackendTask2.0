@@ -1,11 +1,11 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
-option csharp_namespace = "CRMDbService.Services";
-package crmdb;
+option csharp_namespace = "CRMService.Services";
+package crm;
 
-service CRMDb {
+service CRM {
   rpc GetAllServices(EmptyRequest) returns (ServiceList) {}
-  rpc AddApplication(AddApplicationReq) returns (ApplicationResponse) {}
+  rpc AddApplication(AddApplicationRequest) returns (ApplicationResponse) {}
   rpc GetAllApplications(EmptyRequest) returns (ApplicationList) {}
   rpc GetAllTechnicalSupportCalls(EmptyRequest) returns (TechnicalSupportCallList) {}
 }
@@ -14,6 +14,26 @@ message EmptyRequest {}
 
 message ServiceList {
   repeated Service services = 1;
+}
+message AddApplicationRequest {
+  string abonentNumber = 1;
+  string personalAccount = 2;
+  AddServiceRequest service = 3;
+  string equipmentType = 4;
+  AddTechnicalSupportCallRequest technicalSupportCall = 5;
+  int64 closeDate = 6;
+}
+message AddServiceRequest {
+  string serviceName = 1;
+  string abonentNumber = 2;
+  string serviceType = 3;
+  string serviceView = 4;
+  string status = 5;
+}
+message AddTechnicalSupportCallRequest {
+  string problemType = 1;
+  string problemDescription = 2;
+  string abonentNumber = 3;
 }
 message Application {
   string applicationNumber = 1;
@@ -33,30 +53,6 @@ message Service {
   string serviceType = 5;
   string serviceView = 6;
   string status = 7;
-}
-message AddServiceReq{
-  string serviceName = 1;
-  int64 connectionDate = 2;
-  string abonentNumber = 3;
-  string serviceType = 4;
-  string serviceView = 5;
-  string status = 6;
-}
-message AddApplicationReq {
-  string applicationNumber = 1;
-  int64 beginDate = 2;
-  string abonentNumber = 3;
-  string personalAccount = 4;
-  AddServiceReq service = 5;
-  string equipmentType = 6;
-  addTechnicalSupportCallReq technicalSupportCall = 7;
-  int64 closeDate = 8;
-}
-message addTechnicalSupportCallReq {
-  int64 callDate = 1;
-  string problemType = 2;
-  string problemDescription = 3;
-  string abonentNumber = 4;
 }
 message TechnicalSupportCall {
   int64 technicalSupportCallID = 1;

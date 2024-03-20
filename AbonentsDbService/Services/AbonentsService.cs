@@ -12,7 +12,7 @@ public class AbonentsService : Abonents.AbonentsBase
         _abonentManager = new AbonentManager();
     }
 
-    public async override Task<AbonentsReply> GetAbonent(AbonentRequest request, ServerCallContext context)
+    public override async Task<AbonentsReply> GetAbonent(AbonentRequest request, ServerCallContext context)
     {
         AbonentsReply reply = new AbonentsReply();
         var abonents = await _abonentManager.GetAbonents();
@@ -20,7 +20,7 @@ public class AbonentsService : Abonents.AbonentsBase
         return await Task.FromResult(reply);
     }
 
-    public async override Task<AbonentByNumberReply> GetAbonentByPhoneNumber(AbonentByNumberRequest request,
+    public override async Task<AbonentByNumberReply> GetAbonentByPhoneNumber(AbonentByNumberRequest request,
         ServerCallContext context)
     {
         AbonentByNumberReply reply = new AbonentByNumberReply();

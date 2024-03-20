@@ -11,7 +11,7 @@ public class CRMDbService : CRMDb.CRMDbBase
     {
         _applicationsManager = applicationsManager;
     }
-    public async override Task<ApplicationResponse> AddApplication(Application request, ServerCallContext context)
+    public override async Task<ApplicationResponse> AddApplication(AddApplicationReq request, ServerCallContext context)
     {
         DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         return await _applicationsManager.AddApplication(new Models.Application()
@@ -23,7 +23,6 @@ public class CRMDbService : CRMDb.CRMDbBase
             Service = new Models.Service()
             {
                 AbonentNumber = request.Service.AbonentNumber,
-                ServiceId = request.Service.ServiceId,
                 ServiceName = request.Service.ServiceName,
                 ConnectionDate = start.AddMilliseconds(request.Service.ConnectionDate),
                 ServiceType = request.Service.ServiceType,
@@ -44,7 +43,7 @@ public class CRMDbService : CRMDb.CRMDbBase
         });
     }
 
-    public async override Task<ApplicationList> GetAllApplications(EmptyRequest request, ServerCallContext context)
+    public override async Task<ApplicationList> GetAllApplications(EmptyRequest request, ServerCallContext context)
     {
         List<Application> applications = await _applicationsManager.GetApplications();
         var result = new ApplicationList();
@@ -53,7 +52,7 @@ public class CRMDbService : CRMDb.CRMDbBase
         return result;
     }
 
-    public async override Task<ServiceList> GetAllServices(EmptyRequest request, ServerCallContext context)
+    public override async Task<ServiceList> GetAllServices(EmptyRequest request, ServerCallContext context)
     {
         List<Service> services = await _applicationsManager.GetServices();
         var result = new ServiceList();
@@ -62,7 +61,7 @@ public class CRMDbService : CRMDb.CRMDbBase
         return result;
     }
 
-    public async override Task<TechnicalSupportCallList> GetAllTechnicalSupportCalls(EmptyRequest request, ServerCallContext context)
+    public override async Task<TechnicalSupportCallList> GetAllTechnicalSupportCalls(EmptyRequest request, ServerCallContext context)
     {
         List<TechnicalSupportCall> technicalSupportCalls = await _applicationsManager.GetTechnicalSupportCalls();
         var result = new TechnicalSupportCallList();

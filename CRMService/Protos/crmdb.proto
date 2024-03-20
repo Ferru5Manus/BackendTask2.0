@@ -1,12 +1,12 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "CRMDbService.Services";
+option csharp_namespace = "CRMDbService.Communicators";
 package crmdb;
 
 service CRMDb {
   rpc GetAllServices(EmptyRequest) returns (ServiceList) {}
   rpc AddApplication(AddApplicationReq) returns (ApplicationResponse) {}
-  rpc GetAllApplications(EmptyRequest) returns (ApplicationList) {}
+  rpc GetAllApplications(EmptyRequest) returns (ApplicationList) {} 
   rpc GetAllTechnicalSupportCalls(EmptyRequest) returns (TechnicalSupportCallList) {}
 }
 
